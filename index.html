@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature & Humidity Dashboard</title>
+</head>
+<body>
+  <h1>Environment Monitor</h1>
+  <p>Temperature: <span id="temp">--</span> °C</p>
+  <p>Humidity: <span id="humidity">--</span> %</p>
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('https://abcd1234.ngrok.io/api/data'); // Replace with your API path
+        const data = await response.json();
+        document.getElementById('temp').textContent = data.temperature;
+        document.getElementById('humidity').textContent = data.humidity;
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 10000); // Every 10 seconds
+  </script>
+</body>
+</html>
