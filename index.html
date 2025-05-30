@@ -9,21 +9,26 @@
   <p>Humidity: <span id="humidity">--</span> %</p>
 
   <script>
-    async function fetchData() {
-      try {
-        const response = await fetch('https://1845-202-83-56-61.ngrok-free.app/sensor_data');
-        const data = await response.json();
-        const latest = data[data.length - 1]; // Get the last reading
+  async function fetchData() {
+    try {
+      const response = await fetch('https://1845-202-83-56-61.ngrok-free.app/sensor_data', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      });
 
-        document.getElementById('temp').textContent = latest.temperature;
-        document.getElementById('humidity').textContent = latest.humidity;
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
+      const data = await response.json(); // Should now be valid JSON
+      const latest = data[data.length - 1]; // Last entry
+
+      document.getElementById('temp').textContent = latest.temperature;
+      document.getElementById('humidity').textContent = latest.humidity;
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
+  }
 
   fetchData();
-  setInterval(fetchData, 10000); // Refresh every 10 seconds
+  setInterval(fetchData, 10000); // every 10s
 </script>
 </body>
 </html>
