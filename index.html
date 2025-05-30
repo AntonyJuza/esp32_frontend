@@ -11,7 +11,7 @@
   <script>
     async function fetchData() {
       try {
-        const response = await fetch('https://abcd1234.ngrok.io/api/data'); // Replace with your API path
+        const response = await fetch('https://1845-202-83-56-61.ngrok-free.app/sensor_data'); // Replace with your API path
         const data = await response.json();
         document.getElementById('temp').textContent = data.temperature;
         document.getElementById('humidity').textContent = data.humidity;
